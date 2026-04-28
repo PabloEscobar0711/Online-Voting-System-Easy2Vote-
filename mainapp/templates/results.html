@@ -1,0 +1,89 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block body %}
+<style>
+    .results-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 25px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    h2 {
+        color: #222;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .results-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+    .results-list li {
+        background: #f4f4f4;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+    }
+    .results-list li:hover {
+        background: #e9ecef;
+        transform: scale(1.02);
+    }
+    .winner {
+        color: #ff4b2b;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .back-btn:hover {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="results-container">
+    <h2>Results for {{ election.title }}</h2>
+
+    {% if candidates %}
+        {% with top_candidate=candidates|first %}
+        <ul class="results-list">
+            {% for candidate in candidates %}
+                <li>
+                    {{ candidate.name }} ({{ candidate.party }}) - Votes: {{ candidate.vote_count }}
+                    {% if candidate == top_candidate %}
+                        <span class="winner">🏆 Winner</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endwith %}
+    {% else %}
+        <p>No candidates available.</p>
+    {% endif %}
+
+    <a href="{% url 'elections_list' %}" class="back-btn">🔙 Back to Elections</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn Easy2Vote.wsgi

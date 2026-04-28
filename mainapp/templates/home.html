@@ -1,0 +1,324 @@
+{% extends 'parent.html' %}
+{% load static %}
+
+{% block body %}
+{% if countdown_end %}
+<script>
+    const countdownDate = new Date("{{ countdown_end }}").getTime();
+
+    const x = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const bar = document.getElementById("progress-bar");
+        const timeBox = document.getElementById("countdown");
+
+        if (distance <= 0) {
+            clearInterval(x);
+            timeBox.innerHTML = "✅ Results are now available!";
+            timeBox.style.color = "#28a745";
+            bar.style.width = "100%";
+            bar.style.background = "#28a745";
+        } else {
+            const totalDuration = countdownDate - (new Date("{{ current_time_js }}").getTime());
+            const progress = ((totalDuration - distance) / totalDuration) * 100;
+            bar.style.width = progress + "%";
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            timeBox.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+        }
+    }, 1000);
+</script>
+{% endif %}
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9fafc;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        width: 100%;
+        height: 60vh;
+        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                    url('{% static "images/vtbg.jpg" %}') no-repeat center center/cover;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .hero h1 {
+        font-size: 3.2rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #fff;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+    .hero p {
+        font-size: 1.3rem;
+        max-width: 800px;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 12px 20px;
+        border-radius: 10px;
+        color: #f9f9f9;
+    }
+
+
+    /* PAGE HEADINGS */
+    .container {
+        text-align: center;
+        margin: 60px auto 40px;
+        max-width: 1100px;
+    }
+    .highlight {
+        color: #ff4b2b;
+        font-weight: 700;
+    }
+    .underline {
+        border-bottom: 4px solid #ff4b2b;
+        padding-bottom: 3px;
+    }
+
+    /* FEATURES SECTION */
+    .features {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin: 60px auto;
+        max-width: 1100px;
+    }
+    .feature-box {
+        background: #fff;
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(255,65,108,0.15);
+        text-align: center;
+        flex: 1 1 300px;
+        transition: all 0.4s ease;
+    }
+    .feature-box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(255,65,108,0.25);
+    }
+    .feature-box h3 {
+        color: #ff416c;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+    .feature-box h5 {
+        color: #555;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+        background: linear-gradient(45deg, #fff6f4, #ffecef);
+        padding: 80px 30px;
+        text-align: center;
+        border-top: 4px solid #ff4b2b;
+        border-bottom: 4px solid #ff4b2b;
+    }
+    .testimonials h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+    }
+    .testimonial {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 700px;
+        margin: 25px auto;
+        font-style: italic;
+        box-shadow: 0 6px 15px rgba(255,65,108,0.2);
+        transition: 0.3s ease;
+    }
+    .testimonial:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(255,65,108,0.25);
+    }
+
+    /* AUTH BUTTONS (blended) */
+    .auth-section {
+        background: linear-gradient(135deg, #fff6f4, #ffffff);
+        border-radius: 20px;
+        padding: 50px 20px;
+        text-align: center;
+        margin: 60px auto;
+        box-shadow: 0 6px 15px rgba(255,65,108,0.15);
+        max-width: 1000px;
+    }
+    .auth-section h4 {
+        color: #444;
+        margin: 10px 0;
+    }
+    .auth-btn {
+        display: inline-block;
+        padding: 14px 40px;
+        margin: 15px 20px;
+        color: white;
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        border: none;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 15px rgba(255,65,108,0.3);
+    }
+    .auth-btn:hover {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        transform: scale(1.08);
+        box-shadow: 0 10px 25px rgba(255,65,108,0.4);
+    }
+
+    /* ELECTIONS SECTION */
+    .elections-section {
+        padding: 70px 20px;
+        background: #fff;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(255,65,108,0.1);
+        margin: 60px auto;
+        max-width: 1100px;
+        border-top: 4px solid #ff4b2b;
+    }
+    .election-box {
+        background: #fff;
+        padding: 35px;
+        margin: 30px auto;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease-in-out;
+        max-width: 700px;
+    }
+    .election-box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(255,65,108,0.25);
+    }
+
+    /* COUNTDOWN BOX */
+    .countdown-box {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        margin: 20px auto;
+        max-width: 700px;
+        box-shadow: 0 6px 15px rgba(255,65,108,0.2);
+    }
+    .progress-bar-container {
+        width: 100%;
+        height: 12px;
+        background: #f1f1f1;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+    .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        border-radius: 10px;
+        transition: width 1s linear;
+    }
+    #countdown {
+        font-weight: 700;
+        color: #ff4b2b;
+        margin-top: 10px;
+        text-shadow: 0 0 8px rgba(255,65,108,0.3);
+    }
+    
+</style>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Secure & Transparent Online Voting</h1>
+    <p>Your vote matters! Join our secure and easy-to-use voting system.</p>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+    <h1>Welcome to the <span class="highlight underline">Online Voting System</span></h1>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="feature-box">
+        <h3>🔐 Secure</h3>
+        <h5>End-to-end encryption ensures your vote stays confidential.</h5>
+    </div>
+    <div class="feature-box">
+        <h3>🖱️ Easy to Use</h3>
+        <h5>A clean, user-friendly interface for effortless voting.</h5>
+    </div>
+    <div class="feature-box">
+        <h3>⚡ Fast Results</h3>
+        <h5>Real-time and transparent result display post voting.</h5>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial">
+        <h5>"This voting system is incredibly easy to use. I felt secure while voting online."</h5>
+        <strong><span class="highlight">- Ahmed Khan</span></strong>
+    </div>
+    <div class="testimonial">
+        <p>"A transparent and fair voting process. Highly recommended!"</p>
+        <strong><span class="highlight">- Maria Siddiqui</span></strong>
+    </div>
+</section>
+
+<!-- LOGIN & SIGNUP (now blended) -->
+<div class="auth-section">
+    <h4>Participate in Elections by Creating an Account</h4>
+    <a href="{% url 'signup' %}" class="auth-btn">📝 Sign Up</a>
+    <h4>Already Registered?</h4>
+    <a href="{% url 'login' %}" class="auth-btn">🔑 Log In</a>
+</div>
+
+<!-- ELECTIONS -->
+<div class="elections-section">
+    <h2 class="mb-4 fw-bold text-dark">🗳️ Active Elections</h2>
+    {% for election in elections %}
+        <div class="election-box">
+            <h3>{{ election.title }}</h3>
+            <p>{{ election.description }}</p>
+            <p><strong>Voting Ends:</strong> {{ election.end_time|date:"d M Y, H:i" }}</p>
+
+            {% if current_time > election.end_time %}
+                <a href="{% url 'results' election.id %}" class="auth-btn">✅ View Results</a>
+            {% else %}
+                <form method="post" action="{% url 'check_results' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="election_id" value="{{ election.id }}">
+                    <button type="submit" class="auth-btn">🔒 Check Results</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+<!-- COUNTDOWN -->
+{% if error_message %}
+<div class="countdown-box">
+    <strong>{{ error_message }}</strong>
+    <div id="countdown"></div>
+    <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'parent.html' %}
+{% load static %}
+{% block body %}
+<style>
+    .vote-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 25px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    h2 {
+        color: #222;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .error-message {
+        color: red;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .candidate-list {
+        text-align: left;
+        margin-top: 20px;
+    }
+    .candidate {
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        background: #f9f9f9;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .candidate:hover {
+        background: #f1f1f1;
+        transform: scale(1.02);
+    }
+    .candidate img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 15px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+    .candidate input {
+        margin-right: 10px;
+    }
+    .candidate-info {
+        flex-grow: 1;
+    }
+    .candidate-info strong {
+        font-size: 18px;
+        display: block;
+    }
+    .submit-btn {
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 15px;
+    }
+    .submit-btn:hover {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        transform: scale(1.05);
+    }
+</style>
+<div class="vote-container">
+    <h2>Vote in {{ election.title }}</h2>
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="candidate-list">
+            {% for candidate in candidates %}
+                <label class="candidate">
+                    <input type="radio" name="candidate" value="{{ candidate.id }}" required>
+                    <div class="candidate-info">
+                        <strong>{{ candidate.name }}</strong>
+                        <span>({{ candidate.party }})</span>
+                    </div>
+                </label>
+            {% endfor %}
+        </div>
+        <button type="submit" class="submit-btn">Submit Vote</button>
+    </form>
+</div>
+{% endblock %}

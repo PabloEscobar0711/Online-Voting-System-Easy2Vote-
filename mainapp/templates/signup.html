@@ -1,0 +1,121 @@
+{% extends 'parent.html' %}
+{%load static%}
+{% block body %}
+
+    <style media="screen">
+
+        body {
+            background-color: #080710;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        form {
+            height: 690px;
+            width: 450px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+            margin: 50px auto;
+            color: #ffffff;
+        }
+        
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #ffffff;
+        }
+        
+        ::placeholder {
+            color: #e5e5e5;
+        }
+        
+        button {
+            margin-top: 40px;
+            width: 100%;
+            color: #f7f6fa;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.5);
+            transition: 0.5s;
+            border: none;
+        }
+        
+        button.signup:hover {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            transform: scale(1.05);
+        }
+        
+        p {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        a {
+            color: #ff416c;
+            text-decoration: none;
+        }
+        
+        .account:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+
+    
+    <form onsubmit="return validateEmail()" method="post">
+        {% csrf_token %} 
+        <h3>Signup Here</h3>
+
+        <label for="username">Student Name :</label>
+        <input type="text" placeholder="Student Name" name="username" id="username">
+
+        <label>Domain Email :</label>
+        <input type="text" id="email" placeholder="Domain Email" name="email" id="email">
+        <p id="emailError" style="color: red; font-size: 14px;"></p>
+
+
+        <label for="password1">Password :</label>
+        <input type="password" placeholder="Password" id="password1" name="password1">
+
+
+        <label for="password2">Confirm Password :</label>
+        <input type="password" placeholder="Confirm Password" id="password2" name="password2">
+        {% if error_message %}
+        <p style="color: red; font-size: 14px;">{{ error_message }}</p>
+        {% endif %}
+        <button type="submit" class="signup">Signup</button>
+        
+        <p>Already have an account&nbsp;<a class="account" href="{% url 'login' %}" >LogIn</a></p>
+    </form>
+    
+    {% endblock %}

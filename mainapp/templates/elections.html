@@ -1,0 +1,120 @@
+{% extends 'parent.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">🗳️ Active Elections</h2>
+        <p class="text-muted">Cast your valuable vote and help choose the right leader.</p>
+    </div>
+
+    {% if elections %}
+    <div class="alert alert-info text-center fw-bold rounded-4 shadow-sm py-3 bg-light border-0">
+        Currently Active:
+        {% for election in elections %}
+            <span class="badge bg-danger text-light px-3 py-2 fs-6 mx-1">{{ election.title }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="row justify-content-center mt-4 g-4">
+        {% for election in elections %}
+        <div class="col-md-6 col-lg-5">
+            <div class="card election-card border-0 shadow-lg">
+                {% if forloop.counter == 1 %}
+                    <img src="{% static 'images/voting1.jpg' %}" class="card-img-top election-img" alt="Union Leader Election">
+                {% elif forloop.counter == 2 %}
+                    <img src="{% static 'images/voting2.jpg' %}" class="card-img-top election-img" alt="Class Rep Election">
+                {% else %}
+                    <img src="{% static 'images/voting3.jpg' %}" class="card-img-top election-img" alt="Default Election">
+                {% endif %}
+
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title fw-bold mb-3">{{ election.title }}</h3>
+                    <a href="{% url 'vote' election.id %}" class="btn vote-btn px-4 py-2">Vote Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="text-center mt-5">
+            <h5 class="text-danger fw-bold">❌ No elections are currently active.</h5>
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-5">
+        <a href="{% url 'logout' %}" class="logout-btn px-4 py-2">Logout</a>
+    </div>
+</div>
+
+<!-- Custom Styling -->
+<style>
+    /* Gradient Heading */
+    .text-gradient {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Election Card Styling */
+    .election-card {
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        background: #fff;
+    }
+
+    .election-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(255, 65, 108, 0.3);
+    }
+
+    .election-img {
+        height: 450px;
+        object-fit: cover;
+        border-bottom: 5px solid #ff416c;
+    }
+
+    .vote-btn {
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s;
+        box-shadow: 0 4px 10px rgba(255, 65, 108, 0.3);
+    }
+
+    .vote-btn:hover {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(255, 65, 108, 0.4);
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 14px 40px;
+        margin: 15px 20px;
+        color: white;
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        border: none;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.4s ease;
+        box-shadow: 0 6px 15px rgba(255,65,108,0.3);
+    }
+
+    .logout-btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        box-shadow: 0 6px 15px rgba(255, 65, 108, 0.4);
+    }
+
+    body {
+        background: #f7f8fc;
+    }
+</style>
+{% endblock %}
