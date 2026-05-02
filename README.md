@@ -18,22 +18,22 @@ Session-based authentication
 One user = One vote
 Real-time vote casting
 
-**⏳ Election Time Control**
+⏳ Election Time Control
 
 Voting allowed only between start_time and end_time
 Automatic restriction after deadline
 
-**📊 Live Results System**
+📊 Live Results System
 
 Results visible only after voting ends
 Transparent and instant result calculation
 
-**✅ Vote Confirmation System**
+✅ Vote Confirmation System
 
 Success page after vote submission
 Navigation options for better UX
 
-**🎯 Dynamic Homepage**
+🎯 Dynamic Homepage
 
 Elections listing
 Countdown timer
@@ -44,7 +44,7 @@ Backend: Python (Django Framework)
 Database: SQLite (default Django DB)
 Version Control: Git & GitHub
 
-**📂 Project Structure**
+_📂 Project Structure_
 Easy2Vote/
 │── templates/
 │   ├── home.html
@@ -65,29 +65,11 @@ Easy2Vote/
 │── urls.py
 │── manage.py
 
-**⚙️ Installation & Setup**
+⚙️ Installation & Setup
 # Clone the repository
 git clone https://github.com/your-username/easy2vote.git
 
-# Navigate into the project
-cd easy2vote
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-venv\Scripts\activate   # (Windows)
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run migrations
-python manage.py migrate
-
-# Start server
-python manage.py runserver
-
-**🔐 Future Enhancements**
+🔐 Future Enhancements
 🔒 Fingerprint Authentication (Biometric Security)
 📧 Email Verification System
 🧑‍💼 Admin Dashboard with Analytics
@@ -100,17 +82,17 @@ python manage.py runserver
 ✔️ Time-based logic implementation
 ✔️ Secure and scalable architecture
 
-**🙋‍♂️ Author**
+🙋‍♂️ Author
 
 Adnan Saifi
 🎓 Diploma in Computer Science Engineering
 🎓 Pursuing B.Tech in Computer Science Engineering
 💻 Full Stack Developer passionate about building real-world web applications
 
-**⭐ Support**
+⭐ Support
 
 If you like this project, give it a ⭐ on GitHub and share it!
 
-**📬 Contact**
+📬 Contact
 
 Have a project or idea? Let’s collaborate and build something amazing 🚀
