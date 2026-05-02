@@ -118,7 +118,7 @@ This project reflects:
 💻 Frontend Developer | Django Enthusiast  
 
 📧 Email: your-email@example.com  
-🌐 Portfolio: (Add your Netlify link)  
+🌐 Portfolio: https://myportfolio071.netlify.app/ 
 🐙 GitHub: https://github.com/PabloEscobar0711  
 
 ---
