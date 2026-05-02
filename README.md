@@ -1,4 +1,4 @@
-🗳️ Easy2Vote — Secure Online Voting System
+# 🗳️ Easy2Vote — Secure Online Voting System
 
 A modern, secure, and user-friendly online voting platform built with Django that ensures fair elections with real-time results and controlled voting windows.
 
@@ -64,10 +64,6 @@ Easy2Vote/
 │── views.py
 │── urls.py
 │── manage.py
-
-⚙️ Installation & Setup
-# Clone the repository
-git clone https://github.com/your-username/easy2vote.git
 
 🔐 Future Enhancements
 🔒 Fingerprint Authentication (Biometric Security)
