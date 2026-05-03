@@ -115,9 +115,9 @@ This project reflects:
 ## 🤝 📬 Contact
 
 👤 **Adnan Saifi**  
-💻 Frontend Developer | Django Enthusiast  
+💻 Full Stack Developer | UI/UX Designer 
 
-📧 Email: your-email@example.com  
+📧 Email: adhasan07@gmail.com  
 🌐 Portfolio: https://myportfolio071.netlify.app/ 
 🐙 GitHub: https://github.com/PabloEscobar0711  
 
